@@ -1,15 +1,21 @@
-name: TDS
+name: main
 
 on:
-  schedule:
-    # Runs at 12:00 UTC (noon) every day
-    - cron: "0 12 * * *"
-  workflow_dispatch: # Allows manual triggering
-
-
+  push:
+    branches:
+      - main
+  workflow_dispatch:
 
 jobs:
   test:
+    runs-on: ubuntu-latest
+
     steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
       - name: 23f2001413@ds.study.iitm.ac.in
         run: echo "Hello, world!"
+
+      - name: Verify Action
+        run: echo "GitHub Action executed successfully."
