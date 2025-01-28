@@ -23,6 +23,3 @@ async def get_marks(name: List[str] = Query(...)):
     return {"marks": marks}
 
 
-if __name__ == "__main__":
-    import uvicorn
-    uvicorn.run(app, host="127.0.0.1", port=8000)
