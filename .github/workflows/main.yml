@@ -1,3 +1,13 @@
+name: TDS
+
+on:
+  schedule:
+    # Runs at 12:00 UTC (noon) every day
+    - cron: "0 12 * * *"
+  workflow_dispatch: # Allows manual triggering
+
+
+
 jobs:
   test:
     steps:
