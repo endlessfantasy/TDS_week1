@@ -2,7 +2,7 @@ name: Daily Commit
 
 on:
   schedule:
-   - cron: '35 18 * * *'  # Runs at 6:35 PM UTC (12:05 AM IST)
+    - cron: '35 18 * * *'  # Runs daily at 12:05 AM IST (6:35 PM UTC)
   workflow_dispatch:  # Allows manual triggering
 
 jobs:
@@ -18,9 +18,12 @@ jobs:
           git config --global user.name "GitHub Actions Bot"
           git config --global user.email "23f2001413@ds.study.iitm.ac.in"
 
-      - name: Make a Dummy Commit
+      - name: Make a Dummy Change
         run: |
-          echo "Last run: $(date)" > last_run.txt
-          git add last_run.txt
-          git commit -m "Automated commit: $(date)"
-          git push
+          echo "Last run: $(date --utc)" >> last_run.log  # Append, not overwrite
+          git add last_run.log
+
+      - name: Commit and Push Changes
+        run: |
+          git commit -m "Automated commit: $(date --utc)" || echo "No changes to commit"
+          git push || echo "Push failed"
