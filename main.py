@@ -15,7 +15,11 @@ app.add_middleware(
 #test
 with open("data.json") as f:
     data = json.load(f)
-
+    
+@app.get("/")
+async def root():
+    return {"message": "Hello World"}
+    
 @app.get("/api")
 async def get_marks(name: Optional[List[str]] = Query(None)):
     if not name:
